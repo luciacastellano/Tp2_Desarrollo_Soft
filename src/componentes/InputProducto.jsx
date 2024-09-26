@@ -5,7 +5,8 @@ function InputProducto({ onAgregar }){
     //* useState -> función que devuelve nombreProducto y una función para actualizar el nombre*/}
     const [nombreProducto, setNombreProducto] = useState(''); 
     const [cantidad, setCantidad] = useState(0);
-    const [checkbox, setCheckbox] = useState(false); 
+   // const [checkbox, setCheckbox] = useState(false); 
+    let idContador = 0;
 
 // Manejo las funciones de los cambios 
     const CambioNombreProducto = (e) => {
@@ -16,10 +17,13 @@ function InputProducto({ onAgregar }){
         setCantidad(Number(e.target.value)); // para convertir el valor a nro
     }
     const AgregarProducto = () => { //lo llamo cuando el usuario hace click en 'Agregar'
-        console.log(onAgregar)
-
+    
         if(nombreProducto !== '' && cantidad > 0){
-            const nuevoProducto = {nombre: nombreProducto, cantidad: cantidad, estado: false}
+            const nuevoProducto = {
+                id: idContador++,
+                nombre: nombreProducto,
+                cantidad: cantidad,
+                estado: false}
             onAgregar(nuevoProducto);
             setNombreProducto(''); // reseteo el nombre
             setCantidad(0); // reseteo la cantidad al agregar un nuevo producto
